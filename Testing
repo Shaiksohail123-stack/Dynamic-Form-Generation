@@ -1,0 +1,14 @@
+Testing
+Jest: Test form validation, JSON parsing, and error handling.
+Playwright: Simulate user actions for E2E tests.
+
+Jest Test:
+tsx
+```
+test("Form validation works correctly", () => {
+  render(<FormGenerator schema={sampleSchema} />);
+  const submitButton = screen.getByText("Submit");
+  fireEvent.click(submitButton);
+  expect(screen.getByText("This field is required")).toBeInTheDocument();
+});
+```
