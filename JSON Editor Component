@@ -1,0 +1,35 @@
+JSON Editor Component
+Features:
+Real-time validation using try...catch.
+Highlight invalid JSON with error messages.
+
+code:
+import React, { useState } from "react";
+import ReactJson from "react-json-view";
+
+export const JSONEditor: React.FC<{ onUpdate: (schema: any) => void }> = ({ onUpdate }) => {
+  const [error, setError] = useState("");
+
+  const handleUpdate = (updatedJSON: any) => {
+    try {
+      onUpdate(updatedJSON.updated_src);
+      setError("");
+    } catch (e) {
+      setError("Invalid JSON format");
+    }
+  };
+
+  return (
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-2">JSON Editor</h2>
+      <ReactJson
+        src={{}}
+        onEdit={handleUpdate}
+        onAdd={handleUpdate}
+        onDelete={handleUpdate}
+        theme="monokai"
+      />
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+    </div>
+  );
+};
